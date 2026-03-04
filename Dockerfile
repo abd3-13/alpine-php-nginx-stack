@@ -23,7 +23,7 @@ RUN export phpver=$(cat /phpver.e) && export ver=$(cat /ver.e) && \
 		cp /usr/share/zoneinfo/$TZ /etc/localtime; \
 		echo $TZ > /etc/timezone; \
 		echo "date.timezone = $TZ" > /etc/php/conf.d/99_timezone.ini; \
-		tar xf nps_conf.tar -C /etc/
+		tar xf /etc/nps_conf.tar -C /etc/
 
 #Installing composer
 RUN	chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/* && \
@@ -31,7 +31,7 @@ RUN	chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/* && \
 		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 		php composer-setup.php && php -r "unlink('composer-setup.php');" && \
 		mv composer.phar /usr/local/bin/composer && \
-		rm -rf /composer /phpver.e /ver.e
+		rm -rf /composer /phpver.e /ver.e /etc/nps_conf.tar
 
 # Expose the port
 EXPOSE 9680-9699
