@@ -20,6 +20,7 @@ RUN export phpver=$(cat /phpver.e) && export ver=$(cat /ver.e) && \
 		[ ! -f /usr/sbin/php-fpm ] && ln -s /usr/sbin/php-fpm$ver /usr/sbin/php-fpm; \
 		[ ! -d /etc/php ] && ln -s /etc/$phpver /etc/php; \
 		[ ! -d /var/log/php ] && ln -s /var/log/$phpver /var/log/php; \
+		mkdir /var/log/php /var/log/nginx && chown -R nobody:nobody /var/log/php /var/log/nginx; \
 		cp /usr/share/zoneinfo/$TZ /etc/localtime; \
 		echo $TZ > /etc/timezone; \
 		echo "date.timezone = $TZ" > /etc/php/conf.d/99_timezone.ini; \
