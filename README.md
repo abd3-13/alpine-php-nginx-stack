@@ -6,14 +6,10 @@ Linux.
 This image automatically installs the latest available Alpine PHP
 version and configures:
 
--   PHP-FPM
--   Nginx
--   Supervisor
--   Composer
--   Node.js + NPM + Yarn
--   Xdebug
--   SQLite & MySQL support
--   Memcached
+-   PHP-FPM                    -   Nginx
+-   Supervisor                 -   Composer
+-   Node.js + NPM + Yarn       -   Xdebug
+-   SQLite & MySQL support     -   Memcached
 -   Developer utilities (htop, tmux, nano, git)
 
 ------------------------------------------------------------------------
@@ -42,25 +38,26 @@ version and configures:
 ## 📦 Installed PHP Extensions
 
 The container installs a full-featured PHP environment including:
-
+```
 bcmath, bz2, calendar, curl, dom, exif, fileinfo, fpm, gd, intl, imap,
 ldap, mbstring, mysqli, opcache, openssl, pdo, pdo_mysql, pdo_sqlite,
 phar, posix, session, simplexml, sockets, sodium, sqlite3, tokenizer,
 xml, xmlreader, xmlwriter, xsl, zip, xdebug
+```
 
 ------------------------------------------------------------------------
 
 ## 📁 Directory Structure
-
+```
 /var/www/html → Web root\
 /etc → Configurations (nginx, php, supervisor)\
 /usr/local/bin → Composer
-
+```
 ------------------------------------------------------------------------
 
 ## 🔌 Exposed Ports
 
-680-699
+`9680-9699`
 
 Bind the desired port when running the container.
 
@@ -68,7 +65,7 @@ Bind the desired port when running the container.
 
 ## 🐳 Build
 
-docker build -t alpine-php-nginx-stack .
+`docker build -t alpine-php-nginx-stack .`
 
 ------------------------------------------------------------------------
 
@@ -76,11 +73,11 @@ docker build -t alpine-php-nginx-stack .
 
 Basic run:
 
-docker run -p 680:680 alpine-php-nginx-stack
+`docker run -p 680:680 alpine-php-nginx-stack`
 
 With project volume:
 
-docker run -p 680:680 -v \$(pwd):/var/www/html alpine-php-nginx-stack
+`docker run -p 680:680 -v \$(pwd):/var/www/html alpine-php-nginx-stack`
 
 ------------------------------------------------------------------------
 
@@ -90,10 +87,11 @@ Supervisor manages:
 
 -   nginx
 -   php-fpm
+-   other node apps or others
 
 Startup command:
 
-/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+`/usr/bin/supervisord -c /etc/supervisor/supervisord.conf`
 
 ------------------------------------------------------------------------
 
