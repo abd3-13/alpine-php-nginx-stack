@@ -1,6 +1,9 @@
 FROM alpine
 WORKDIR /var/www/html
 
+# Set environment variable for timezone
+ENV TZ=Africa/Addis_Ababa
+
 # Install packages
 RUN export phpver=$(apk search --no-cache php | awk -F- '/^php(..)-[0-9]/ {print $1}' |tail -n 1) && \
 		export ver=$(echo $phpver | grep -o "[0-9]\+") && echo $phpver > /phpver.e && echo $ver > /ver.e && \
@@ -16,6 +19,9 @@ RUN export phpver=$(cat /phpver.e) && export ver=$(cat /ver.e) && \
 		[ ! -f /usr/sbin/php-fpm ] && ln -s /usr/sbin/php-fpm$ver /usr/sbin/php-fpm; \
 		[ ! -d /etc/php ] && ln -s /etc/$phpver /etc/php; \
 		[ ! -d /var/log/php ] && ln -s /var/log/$phpver /var/log/php; \
+		cp /usr/share/zoneinfo/$TZ /etc/localtime; \
+		echo $TZ > /etc/timezone; \
+		echo "date.timezone = $TZ" > /etc/php/conf.d/99_timezone.ini; \
 		tar xf nps_conf.tar -C /etc/
 
 #Installing composer
