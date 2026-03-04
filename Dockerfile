@@ -26,7 +26,7 @@ RUN	chown -R nobody:nobody /var/www/html /run /var/lib/nginx /var/log/* && \
 		rm -rf /composer /phpver.e /ver.e
 
 # Expose the port
-EXPOSE 680-699
+EXPOSE 9680-9699
 
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
